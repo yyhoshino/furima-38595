@@ -51,11 +51,11 @@ belongs_to :purchase
 |description        |text      |null:false                  |
 |price              |integer   |null:false                  |
 |user               |references|null:false                  |
-|categories_id        |string    |null:false                  |
-|conditions_id       |string    |null:false                  |
-|shipping_charges_id|string    |null:false                  |
-|prefectures_id      |string    |null:false                  |
-|shipping_days_id    |string    |null:false                  |
+|category_id        |integer   |null:false                  |
+|condition_id       |integer   |null:false                  |
+|shipping_charge_id |integer   |null:false                  |
+|prefecture_id      |integer   |null:false                  |
+|shipping_day_id    |integer   |null:false                  |
 
 ### Association
 belongs_to :user
