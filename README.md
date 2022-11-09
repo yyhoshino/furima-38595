@@ -18,7 +18,7 @@
 has_many　:products dependent: :destroy
 has_many :purchases
 
-## purchaseテーブル
+## purchasesテーブル
 
 |Column      |Type      |Options                     |
 |------------|----------|----------------------------|
