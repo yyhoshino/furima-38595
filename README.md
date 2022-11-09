@@ -16,7 +16,7 @@
 
 ### Association
 has_many　:products dependent: :destroy
-has_many :purchase
+has_many :purchases
 
 ## purchaseテーブル
 
@@ -28,7 +28,7 @@ has_many :purchase
 ### Association
 belongs_to :user
 belongs_to :product
-belongs_to :address
+has_one :address
 
 ## addressesテーブル
 |Column         |Type      |Options                     |
@@ -51,11 +51,11 @@ belongs_to :purchase
 |description        |text      |null:false                  |
 |price              |integer   |null:false                  |
 |user               |references|null:false                  |
-|category_id        |string    |null:false                  |
-|condition_id       |string    |null:false                  |
+|categories_id        |string    |null:false                  |
+|conditions_id       |string    |null:false                  |
 |shipping_charges_id|string    |null:false                  |
-|prefecture_id      |string    |null:false                  |
-|shipping_day_id    |string    |null:false                  |
+|prefectures_id      |string    |null:false                  |
+|shipping_days_id    |string    |null:false                  |
 
 ### Association
 belongs_to :user
