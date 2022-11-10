@@ -2,10 +2,10 @@
 
 ## usersテーブル
 
-|Column            |Type   |Options                 |
-|------------------|-------|------------------------|
+|Column            |Type   |Options                |
+|------------------|-------|-----------------------|
 |name              |string |null: false            |
-|email             |string |null: false,unique: true|
+|email             |string |null: false            |
 |encrypted_password|string |null: false            |
 |first_name        |string |null: false            |
 |last_name         |string |null: false            |
