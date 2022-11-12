@@ -42,27 +42,27 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Price must be less than or equal to 9999999")
       end
-      it 'category_idが空だと出品できない' do
+      it 'カテゴリーに「---」が選択されている場合は出品できない' do
         @product.category_id = ''
         @product.valid?
         expect(@product.errors.full_messages).to include("Category can't be blank")
       end
-      it 'condition_idが空だと出品できない' do
+      it '商品の状態に「---」が選択されている場合は出品できない' do
         @product.condition_id = ''
         @product.valid?
         expect(@product.errors.full_messages).to include("Condition can't be blank")
       end
-      it 'shipping_charge_idが空だと出品できない' do
+      it '配送料の負担に「---」が選択されている場合は出品できない' do
         @product.shipping_charge_id = ''
         @product.valid?
         expect(@product.errors.full_messages).to include("Shipping charge can't be blank")
       end
-      it 'prefecture_idが空だと出品できない' do
+      it '発送元の地域に「---」が選択されている場合は出品できない' do
         @product.prefecture_id = ''
         @product.valid?
         expect(@product.errors.full_messages).to include("Prefecture can't be blank")
       end
-      it 'shipping_day_idがからだと出品できない' do
+      it '発送までの日数に「---」が選択されている場合は出品できない' do
         @product.shipping_day_id = ''
         @product.valid?
         expect(@product.errors.full_messages).to include("Shipping day can't be blank")
@@ -71,6 +71,11 @@ RSpec.describe Product, type: :model do
         @product.image = nil
         @product.valid?
         expect(@product.errors.full_messages).to include("Image Image can't be blank")
+      end
+      it 'userが紐付いていなければ出品できない' do
+        @product.user = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include("User must exist")
       end
     end
   end
