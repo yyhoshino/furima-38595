@@ -30,17 +30,17 @@ RSpec.describe Product, type: :model do
       it 'priceが¥299以下だと登録できない' do
         @product.price = '299'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@product.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it 'priceが全角数字だと登録できない' do
         @product.price = '１０００'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price is not a number")
+        expect(@product.errors.full_messages).to include('Price is not a number')
       end
       it 'priceが¥10,000,000だと登録できない' do
         @product.price = '10000000'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@product.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it 'カテゴリーに「---」が選択されている場合は出品できない' do
         @product.category_id = ''
@@ -75,7 +75,7 @@ RSpec.describe Product, type: :model do
       it 'userが紐付いていなければ出品できない' do
         @product.user = nil
         @product.valid?
-        expect(@product.errors.full_messages).to include("User must exist")
+        expect(@product.errors.full_messages).to include('User must exist')
       end
     end
   end
