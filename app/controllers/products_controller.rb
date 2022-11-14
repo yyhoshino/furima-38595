@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_product, only: [:edit, :update, :show ,:destroy]
+  before_action :set_products, only: [:edit, :destroy]
   def index
     @products = Product.order(id: 'DESC')
   end
@@ -13,9 +14,6 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    unless @product.user == current_user
-      redirect_to action: :index
-    end
   end
 
   def update
@@ -50,4 +48,11 @@ class ProductsController < ApplicationController
   def set_product
     @product = Product.find(params[:id])
   end
+
+  def set_products
+    unless @product.user == current_user
+      redirect_to action: :index
+    end
+  end
+  
 end
