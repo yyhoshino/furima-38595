@@ -50,7 +50,7 @@ class ProductsController < ApplicationController
   end
 
   def set_products
-    unless @product.user == current_user
+    if @product.user_id != current_user.id || @product.purchase != nil
       redirect_to action: :index
     end
   end
