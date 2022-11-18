@@ -8,7 +8,7 @@ FactoryBot.define do
     shipping_charge_id    { 2 }
     prefecture_id         { 2 }
     shipping_day_id       { 2 }
-    
+
     user
 
     after(:build) do |product|
