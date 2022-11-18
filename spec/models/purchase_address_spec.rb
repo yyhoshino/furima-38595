@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe PurchaseAddress, type: :model do
   describe '商品購入記録の保存' do
     before do
-       @user = FactoryBot.build(:user)
-       @product = FactoryBot.build(:product)
+       @user = FactoryBot.create(:user)
+       @product = FactoryBot.create(:product)
        @purchase_address = FactoryBot.build(:purchase_address,user_id: @user.id, product_id: @product.id)
     end
 
@@ -19,13 +19,18 @@ RSpec.describe PurchaseAddress, type: :model do
     end
 
     context '内容に問題がある場合' do
-      it '郵便番号は『３桁ハイフン４桁』半角英数字でないと保存できないこと' do
+      it '郵便番号は空では保存できないこと' do
         @purchase_address.post_code = ''
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Post code can't be blank")
+      end
+      it '郵便番号は『３桁ハイフン４桁』半角英数字でないと保存できないこと' do
+        @purchase_address.post_code = '123-123４'
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
       end
       it '都道府県に「---」が選択されている場合は購入できないこと' do
-        @purchase_address.prefecture_id = ''
+        @purchase_address.prefecture_id = '1'
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Prefecture can't be blank")
       end
@@ -33,6 +38,11 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.city = ''
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("City can't be blank")
+      end
+      it '番地が空だと購入できないこと' do
+        @purchase_address.address = ''
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Address can't be blank")
       end
       it '電話番号が空だと購入できないこと' do
         @purchase_address.phone_number = nil
@@ -59,6 +69,17 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
       end
+      it 'user_idが紐づいていなければ購入できないこと' do
+        @purchase_address.user_id = ''
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'product_idが紐づいていなければ購入できないこと' do
+        @purchase_address.product_id = ''
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Product can't be blank")
+      end
+
     end
   end
 end
