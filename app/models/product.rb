@@ -12,7 +12,6 @@ class Product < ApplicationRecord
 
   validates :name, presence: true
   validates :description, presence: true
-  validates :price, presence: true
   validates :user, presence: true
 
   with_options numericality: { other_than: 1, message: "can't be blank" } do
