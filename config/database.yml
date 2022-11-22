@@ -18,9 +18,9 @@ development:
   <<: *default
   adapter: mysql2
   username: root
-  password:
-  host: localhost
-  database: furima_38595_development
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  database: furima_38595_production
+  socket: /var/lib/mysql/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
